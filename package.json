@@ -1,0 +1,9 @@
+{
+  "name": "oxygen-sports-tracker-root",
+  "version": "1.0.0",
+  "description": "Root package manager for starting full-stack tracker app",
+  "scripts": {
+    "start": "node start-all.js",
+    "dev": "node start-all.js"
+  }
+}

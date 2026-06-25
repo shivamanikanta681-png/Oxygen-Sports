@@ -1,0 +1,228 @@
+{
+  "info": {
+    "_postman_id": "8c57e62a-431b-4171-aa3b-85be99df2f7c",
+    "name": "Oxygen Sports - Tracker APIs Test Suite",
+    "description": "Integration test queries for sponsorships, logic engine analysis, and audit trails.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "System Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Sponsorship Listings (Dashboard)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/sports_event_sponsorship_kit_donati?page=1&limit=20&status=All&search=",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "sports_event_sponsorship_kit_donati"
+          ],
+          "query": [
+            { "key": "page", "value": "1" },
+            { "key": "limit", "value": "20" },
+            { "key": "status", "value": "All" },
+            { "key": "search", "value": "" }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Sponsorship Entry (Valid Payload)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"event_name\": \"Hyderabad Youth Tournament\",\n  \"event_date\": \"2026-06-20\",\n  \"category\": \"Tournament\",\n  \"budget_limit\": 15000.00,\n  \"items_donated\": [\n    { \"name\": \"Cricket Bats\", \"qty\": 5, \"unitCost\": 1200.00 },\n    { \"name\": \"Leather Balls\", \"qty\": 10, \"unitCost\": 250.00 }\n  ],\n  \"brand_visibility_received\": {\n    \"banner\": true,\n    \"jerseyLogo\": false,\n    \"socialMedia\": true,\n    \"prizeSpeech\": false\n  },\n  \"status\": \"Approved\",\n  \"notes\": \"Initial donation set.\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/sports_event_sponsorship_kit_donati",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "sports_event_sponsorship_kit_donati"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Sponsorship Entry (Exceeds Budget Overflow)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"event_name\": \"Overbudget Govt School Pitch\",\n  \"event_date\": \"2026-06-22\",\n  \"category\": \"School\",\n  \"budget_limit\": 5000.00,\n  \"items_donated\": [\n    { \"name\": \"Football Set\", \"qty\": 10, \"unitCost\": 1000.00 }\n  ],\n  \"brand_visibility_received\": {\n    \"banner\": true\n  },\n  \"status\": \"Approved\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/sports_event_sponsorship_kit_donati",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "sports_event_sponsorship_kit_donati"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Retrieve Record Details",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/sports_event_sponsorship_kit_donati/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "sports_event_sponsorship_kit_donati",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Process Logic Engine Analytics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/sports_event_sponsorship_kit_donati/1/engine_analysis",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "sports_event_sponsorship_kit_donati",
+            "1",
+            "engine_analysis"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Sponsorship Details (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"event_name\": \"Hyderabad Youth Tournament (Updated Name)\",\n  \"event_date\": \"2026-06-20\",\n  \"category\": \"Tournament\",\n  \"budget_limit\": 15000.00,\n  \"items_donated\": [\n    { \"name\": \"Cricket Bats\", \"qty\": 6, \"unitCost\": 1200.00 },\n    { \"name\": \"Leather Balls\", \"qty\": 10, \"unitCost\": 250.00 }\n  ],\n  \"brand_visibility_received\": {\n    \"banner\": true,\n    \"jerseyLogo\": false,\n    \"socialMedia\": true,\n    \"prizeSpeech\": false\n  },\n  \"status\": \"Disbursed\",\n  \"notes\": \"Updated bat quantity.\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/sports_event_sponsorship_kit_donati/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "sports_event_sponsorship_kit_donati",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Transition Sponsorship Status (PATCH)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"Completed\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/sports_event_sponsorship_kit_donati/1/status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "sports_event_sponsorship_kit_donati",
+            "1",
+            "status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Fetch Audit Trail logs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/audit_logs?sponsorship_id=1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "audit_logs"
+          ],
+          "query": [
+            { "key": "sponsorship_id", "value": "1" }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
