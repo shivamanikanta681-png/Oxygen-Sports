@@ -4,6 +4,7 @@
   "description": "Root package manager for starting full-stack tracker app",
   "scripts": {
     "start": "node start-all.js",
-    "dev": "node start-all.js"
+    "dev": "node start-all.js",
+    "build": "npm install --prefix frontend && npm run build --prefix frontend"
   }
 }
